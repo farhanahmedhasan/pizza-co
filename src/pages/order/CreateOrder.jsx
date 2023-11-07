@@ -1,3 +1,7 @@
+import {Form, redirect} from "react-router-dom"
+
+import {createOrder} from "../../services/apiRestaurant.js"
+
 const fakeCart = [
     {
         pizzaId: 12,
@@ -30,7 +34,8 @@ function CreateOrder() {
         <div>
             <h2>Ready to order? Let&apos;s go!</h2>
 
-            <form>
+
+            <Form method="post">
                 <div>
                     <label>First Name</label>
                     <input type="text" name="customer" required/>
@@ -64,9 +69,26 @@ function CreateOrder() {
                 <div>
                     <button type="submit">Order now</button>
                 </div>
-            </form>
+
+                <input type="hidden" name="cart" value={JSON.stringify(cart)}/>
+            </Form>
         </div>
     )
+}
+
+export async function action({request}) {
+    const formData = await request.formData()
+    const order = Object.fromEntries(formData)
+
+    const formattedOrder = {
+        ...order,
+        cart: JSON.parse(order.cart),
+        priority: order.priority === "on"
+    }
+
+    const newOrder = await createOrder(formattedOrder)
+
+    return redirect(`/order/${newOrder.id}`)
 }
 
 export default CreateOrder
