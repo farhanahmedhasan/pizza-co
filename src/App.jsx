@@ -1,10 +1,11 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import Order from "./pages/order/Order.jsx"
-import Home from "./pages/Home.jsx"
-import Menu from "./pages/menu/Menu.jsx"
-import Cart from "./pages/cart/Cart.jsx"
-import AppLayout from "./layout/AppLayout.jsx"
+
+import Menu, {loader as menuLoader} from "./pages/menu/Menu.jsx"
 import CreateOrder from "./pages/order/CreateOrder.jsx"
+import AppLayout from "./layout/AppLayout.jsx"
+import Order from "./pages/order/Order.jsx"
+import Cart from "./pages/cart/Cart.jsx"
+import Home from "./pages/Home.jsx"
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/menu",
-                element: <Menu/>
+                element: <Menu/>,
+                loader: menuLoader
             },
             {
                 path: "/cart",
