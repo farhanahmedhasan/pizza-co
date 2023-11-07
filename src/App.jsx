@@ -5,11 +5,13 @@ import CreateOrder from "./pages/order/CreateOrder.jsx"
 import AppLayout from "./layout/AppLayout.jsx"
 import Order from "./pages/order/Order.jsx"
 import Cart from "./pages/cart/Cart.jsx"
+import Error from "./pages/Error.jsx"
 import Home from "./pages/Home.jsx"
 
 const router = createBrowserRouter([
     {
         element: <AppLayout/>,
+        errorElement: <Error/>,
         children: [
             {
                 path: "/",
@@ -18,7 +20,8 @@ const router = createBrowserRouter([
             {
                 path: "/menu",
                 element: <Menu/>,
-                loader: menuLoader
+                loader: menuLoader,
+                errorElement: <Error/>
             },
             {
                 path: "/cart",
