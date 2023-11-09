@@ -14,7 +14,7 @@ export default function AppLayout() {
 
             {isLoading && <Spinner/>}
 
-            <div className="overflow-scroll">
+            <div className="overflow-y-scroll">
                 <main className="max-w-3xl mx-auto">
                     <Outlet/>
                 </main>
