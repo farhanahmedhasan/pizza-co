@@ -1,6 +1,7 @@
 import {Outlet, useNavigation} from "react-router-dom"
 import Spinner from "../components/Spinner.jsx"
 import Header from "../partials/Header.jsx"
+import CartOverview from "../pages/cart/CartOverview.jsx"
 
 export default function AppLayout() {
     const navigation = useNavigation()
@@ -16,13 +17,13 @@ export default function AppLayout() {
 
             {isLoading && <Spinner/>}
 
-            <div className="overflow-y-scroll col-span-10">
+            {!isLoading && <div className="overflow-y-scroll col-span-10">
                 <main className="max-w-3xl mx-auto h-[1000px]">
                     <Outlet/>
                 </main>
-            </div>
+            </div>}
 
-            {/*<CartOverview/>*/}
+            <CartOverview/>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 export default function Spinner() {
     return (
-        <div className="loader"></div>
+        <div className="loader col-span-10"></div>
     )
 }
