@@ -9,7 +9,7 @@ export default function Button({
     href,
     children
 }) {
-    const base = "font-semibold inline-block tracking-wide rounded-full " +
+    const base = "text-sm font-semibold inline-block tracking-wide rounded-full " +
         " transition-all duration-200 focus:outline-none focus:ring " +
         "focus:ring-offset-2 disabled:cursor-not-allowed"
 

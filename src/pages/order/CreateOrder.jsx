@@ -1,6 +1,4 @@
-import {Form, redirect, useActionData, useNavigation} from "react-router-dom"
-
-import {createOrder} from "../../services/apiRestaurant.js"
+import {Form, useActionData, useNavigation} from "react-router-dom"
 import {isValidPhone} from "../../utils/helpers.js"
 import Button from "../../components/Button.jsx"
 
@@ -38,27 +36,40 @@ function CreateOrder() {
     const cart = fakeCart
 
     return (
-        <div>
-            <h2>Ready to order? Let&apos;s go!</h2>
+        <div className="px-4 py-6">
+            <h2 className="mb-8 text-xl font-semibold">Ready to order? Let&apos;s go!</h2>
 
 
             <Form method="post">
-                <div>
-                    <label>First Name</label>
-                    <input type="text" name="customer" required/>
+                <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-center">
+                    <label className="md:basis-40">First Name</label>
+                    <input
+                        type="text"
+                        className="flex-1 rounded-full px-4 py-2 text-sm border border-stone-200 transition-all duration-200 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
+                        name="customer"
+                        required/>
                 </div>
 
-                <div>
-                    <label>Phone number</label>
-                    <div>
-                        <input type="tel" name="phone" required/>
+                <div
+                    className={`mb-5 flex flex-col gap-2 md:flex-row ${errors?.phone ? "md:items-start" : "md:items-center"}`}>
+                    <label className={`md:basis-40 ${errors?.phone ? "md:mt-3 text-red-700" : ""}`}>Phone
+                        number
+                    </label>
+                    <div className="grow">
+                        <input
+                            type="tel"
+                            className="w-full rounded-full px-4 py-2 text-sm border border-stone-200 transition-all duration-200 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
+                            name="phone"
+                            required/>
+                        {errors?.phone &&
+                            <span
+                                className="text-xs ml-4 mt-2 py-0.5 px-3 text-red-700 bg-red-100 rounded-md">{errors?.phone}</span>}
                     </div>
-                    {errors?.phone && <span>{errors?.phone}</span>}
                 </div>
 
-                <div>
-                    <label>Address</label>
-                    <div>
+                <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-center">
+                    <label className="md:basis-40">Address</label>
+                    <div className="grow">
                         <input
                             type="text"
                             className="w-full rounded-full px-4 py-2 text-sm border border-stone-200 transition-all duration-200 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
@@ -67,7 +78,7 @@ function CreateOrder() {
                     </div>
                 </div>
 
-                <div>
+                <div className="mb-10 flex items-center gap-5">
                     <input
                         type="checkbox"
                         className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
@@ -76,7 +87,7 @@ function CreateOrder() {
                         // value={withPriority}
                         // onChange={(e) => setWithPriority(e.target.checked)}
                     />
-                    <label htmlFor="priority">Want to yo give your order priority?</label>
+                    <label htmlFor="priority" className="font-medium">Want to yo give your order priority?</label>
                 </div>
 
                 <div>
@@ -109,8 +120,10 @@ export async function action({request}) {
 
     if (Object.keys(errors).length) return errors
 
-    const newOrder = await createOrder(formattedOrder)
-    return redirect(`/order/${newOrder.id}`)
+    return null
+
+    // const newOrder = await createOrder(formattedOrder)
+    // return redirect(`/order/${newOrder.id}`)
 }
 
 export default CreateOrder
