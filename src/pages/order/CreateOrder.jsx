@@ -2,6 +2,7 @@ import {Form, redirect, useActionData, useNavigation} from "react-router-dom"
 
 import {createOrder} from "../../services/apiRestaurant.js"
 import {isValidPhone} from "../../utils/helpers.js"
+import Button from "../../components/Button.jsx"
 
 const fakeCart = [
     {
@@ -58,13 +59,18 @@ function CreateOrder() {
                 <div>
                     <label>Address</label>
                     <div>
-                        <input type="text" name="address" required/>
+                        <input
+                            type="text"
+                            className="w-full rounded-full px-4 py-2 text-sm border border-stone-200 transition-all duration-200 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
+                            name="address"
+                            required/>
                     </div>
                 </div>
 
                 <div>
                     <input
                         type="checkbox"
+                        className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
                         name="priority"
                         id="priority"
                         // value={withPriority}
@@ -74,8 +80,12 @@ function CreateOrder() {
                 </div>
 
                 <div>
-                    <button type="submit"
-                        disabled={isSubmitting}>{isSubmitting ? "Placing order..." : "Order now"}</button>
+                    <Button
+                        disabled={isSubmitting}
+                        type="submit"
+                    >
+                        {isSubmitting ? "Placing order..." : "Order now"}
+                    </Button>
                 </div>
 
                 <input type="hidden" name="cart" value={JSON.stringify(cart)}/>

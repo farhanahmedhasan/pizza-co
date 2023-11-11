@@ -19,8 +19,13 @@ export default function SearchOrder() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" name="order" value={query} onChange={handleChange}
-                placeholder="Track your order by providing order number"/>
+            <input
+                type="text"
+                className="form-input"
+                name="order"
+                value={query}
+                onChange={handleChange}
+                placeholder="Provide order id"/>
         </form>
     )
 }
